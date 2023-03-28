@@ -1,0 +1,14 @@
+
+<div class="card max-w-sm bg-base-100 shadow-xl">
+  <figure class="px-10 pt-10">
+    <img src="{{post.urlImg }}" alt="Shoes" class="rounded-xl" /></figure>
+  <div class="card-body items-center text-center">
+    <h2 class="card-title">{{ post.title}}</h2>
+    <p>{{post.content}}</p>
+    <div class="card-actions">
+      <a href="{{ path('app_show',{'id':post.id} ) }}" class="btn btn-primary">Lire</a>
+    </div>
+  </div>
+</div>
+
+

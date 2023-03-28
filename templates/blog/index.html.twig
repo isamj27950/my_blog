@@ -1,0 +1,20 @@
+{# utilisation du layout #}
+{% extends"base.html.twig" %}
+
+{% block title %}Accueil{% endblock %}
+
+{# content #}
+{% block body %}
+{{ dump(posts) }}
+<h1 class="text-indigo-700 text-3xl font-bold pb-4">Nos derniers articles</h1>
+
+<div class="grid grid-cols-3 space-x-3">
+{#je fais une boucle de mes articles#}
+{% for post in posts %}
+    {% include "blog/components/card.html.twig" %}   
+{% endfor %}
+
+
+</div>
+
+{% endblock %}
