@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Post;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,14 +18,15 @@ class POstFormType extends AbstractType
             ->add('title', TextType::class,[
                 'attr'  => [
                     'class' =>'form',
-                ] 
+                ],
+                'required'=> false 
             ])
             ->add('content', TextareaType::class,[
                 'attr'  => [
                     'class' =>'form',
                 ]
             ])          
-            ->add('url_img',TextType::class,[
+            ->add('url_img',FileType::class,[
                 'attr'  => [
                     'class' =>'form',
                 ]
