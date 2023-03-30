@@ -39,7 +39,7 @@ class POstFormType extends AbstractType
                 'attr'  => [
                     'class' =>'form',
                 ],
-                'label'=> 'Titre du post',
+                'label'=> 'Contenu du post',
                 'constraints' => [
                     new NotBlank([
                         "message" =>"Champs obligatoire"
@@ -53,14 +53,15 @@ class POstFormType extends AbstractType
                 ]
             ])          
             ->add('url_img',FileType::class,[
+                'mapped' => false,
                 'attr'  => [
                     'class' =>'form',
                 ],
-                'label'=> 'Titre du post',
+                'label'=> 'Image du post',
                 'constraints'=> [
-                    new NotBlank([
-                        "message" =>"Champs obligatoire"
-                    ]),
+                    //new NotBlank([
+                     //   "message" =>"Champs obligatoire"
+                   // ]),
                     new File([
                         'maxSize' => '3M',
                         'maxSizeMessage' =>'Votre fichier ne doit dépasser {{ limit }} ',
@@ -77,7 +78,7 @@ class POstFormType extends AbstractType
                 'attr'  => [
                     'class' =>'form',
                 ],
-                'label'=> 'Titre du post',
+                'label'=> 'Auteur du post',
                 'constraints' => [
                     new NotBlank([
                         "message" =>"Champs obligatoire"
@@ -94,7 +95,7 @@ class POstFormType extends AbstractType
                 'attr'  => [
                     'class' =>'form',
                 ],
-                'label'=> 'Titre du post',
+                'label'=> 'Catégorie du post',
                 'constraints' => [
                     new NotBlank([
                         "message" =>"Champs obligatoire"

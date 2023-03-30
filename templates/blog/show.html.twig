@@ -6,17 +6,21 @@
 
 {# content #}
 {% block body %}
-<div class="card m-auto mt-6 text-center p-8 flex-shrink-0 w-full max-w-sm bg-zinc-500 shadow-inner-xl">
+<div class="card max-w-sm bg-zinc-200 shadow-xl">
 <h1 class="text-indigo-700 text-3xl uppercase font-bold pb-4">{{ post.title }}</h1>
 <div class="">
     <img src="{{ post.urlImg }}" alt="{{ post.title}}" />
     </div>
 <div class="mt-4 m-auto w-full max-w-sm  text-indigo-700">
 <p>{{ post.content}}</p>
+<p class="italic pt-6 text-gray-500">{% if post.author %}</p>
 </div>
-<div class="my-2 space-x-8">
-<a href="" class="btn btn-primary">Modifier</a>
-<a href="{{ path ('app_delete', {'id': post.id}) }}" class="btn btn-error">Supprimer</a>
+{% if app.user %}
+
+    <div class="my-2 space-x-8">
+        <a href="{{ path ('app_update', {'id': post.id}) }}" class="btn btn-primary">Modifier</a>
+        <a href="{{ path ('app_delete', {'id': post.id}) }}" class="btn btn-error">Supprimer</a>
 </div>
+{% endif %}
 </div>
 {% endblock %}

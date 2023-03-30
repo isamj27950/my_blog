@@ -100,6 +100,55 @@ class BlogController extends AbstractController
             'showForm' => $form->createView()
         ]);
     }
-
-
+    #[Route('/update/{id}',name: 'app_update', methods: ['GET','POST'])]
+    public function update($id, PostRepository $repo, Request $request, EntityManagerInterface $em): Response
+    {
+        //1-Je recuperre le post avec l'id
+        $post = $repo->find($id);
+        //2-create form + prés rempli le formulaire avec $post
+        $form = $this->createForm(POstFormType::class,$post);
+        //Ajouter en bdd
+        //1-recupere data de mes input
+        $form->handleRequest($request);
+        //recupere l'url de l'ima enBDD
+        $imagePath = $form->get('url_img')->getData();
+        //2-soumision du formulaire
+        if($form->isSubmitted() && $form->isValid()){
+            //verifie si une img a ete choisi
+            if($imagePath){
+                //on vérifie que l'image existe ds la db
+                if($post->getUrlImg() !== null ){
+                    //renomme l'image qu'il a choisit
+                    $newFileName = uniqid(). '.' . $imagePath->guessExtension();
+                    //donne a l'image un new name    
+                    try {
+                    //deplacer l'image dans le dossier public/upload
+                    $imagePath->move(
+                        $this->getParameter('kernel.project_dir') . '/public/upload',
+                        $newFileName
+                    );
+                    }catch (FileException $e) {
+                        return new Response($e->getMessage());
+                    }
+                    //je modifie l'urlimag ds $post
+                    $post->setUrlImg('/upload/'. $newFileName);
+                    $em->flush();
+                    return $this->redirectToRoute('app_home');
+                } else {
+                    $post->setUrlImg($form->get('url_img')->getData());
+                    $em->flush();
+                    return $this->redirectToRoute('app_home');
+                }
+            }
+            //recupere lesdata user s'il modifie ou non
+            
+            $post->setUpdatedAt(new DateTimeImmutable());
+            $em->flush();
+            return $this->redirectToRoute('app_home');
+        }
+        //3-envoie du formulaire ds la vue
+        return $this->render('blog/update.html.twig',[
+            'showForm' => $form->createView()
+        ]);
+    }
 }

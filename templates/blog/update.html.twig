@@ -1,0 +1,20 @@
+{% extends"base.html.twig" %}
+
+{% block title %}
+Accueil
+{% endblock %}
+
+
+{% block body %}
+    <h1 class="text-indigo-700 text-3xl text-center font-bold pb-4">Modifier l'article</h1>
+
+    <div class="max-w-sm mx-auto">
+        {{ form_start(showForm ,{'attr':{'novalidate': 'novalidate'}}) }}
+            {{form_widget(showForm)}}
+            <div class="mt-5">
+                <input type="submit" value="Envoyer" class="btn btn-secondary">
+            </div>
+        {{form_end(showForm)}}
+    </div>
+
+{% endblock %}

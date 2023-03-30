@@ -1,11 +1,24 @@
 <div class="navbar bg-zinc-300 ">
     <div class="flex-1">
-        <a class="btn btn-ghost uppercase text-xl py-2">TOTO BLOG</a>
+        <a href="{{ path ('app_home')}}"class="btn btn-ghost uppercase text-xl font-black py-2">TOTOBLOG</a>
     </div>
     <div class="flex-none">
         <ul class="menu menu-horizontal px-1">
-            <li><a href="{{ path ('app_create')}}">Créer un article</a></li>
-            <li><a>Connexion</a></li>   
+            <li>
+            {% if app.user %}
+                <a href="{{ path ('app_create')}}">Créer un article</a>
+            {% endif %}
+            </li>
+            <li>
+                <a href="/{{ app.user ?'logout' :'login'}}">
+                    {{ app.user ? 'Déconnexion': 'Connexion'}}
+                </a>
+            </li>
+            <li>
+            {% if app.user %}
+                <button class="bnt bnt-info">{{app.user.email}}</button>
+            {% endif %}
+            </li>   
         </ul>
     </div>
 </div>
